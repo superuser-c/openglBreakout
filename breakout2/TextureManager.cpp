@@ -16,27 +16,6 @@ TextureManager::~TextureManager()
 
 void TextureManager::loadResource(const char *file, std::string name)
 {
-	/*
-	Texture2D *texture = new Texture2D();
-	// load and generate the texture
-	int nrChannels, w, h;
-	unsigned char *data = stbi_load(file, &w, &h, &nrChannels, 0);
-	if (data)
-	{
-		texture->Internal_Format = GL_RGBA;
-		texture->Image_Format = GL_RGBA;
-		texture->Generate(w, h, data);
-		FLog::glogf("loaded texture: " + name + "ID: " + std::to_string(texture->ID), 
-			"TEXTURES", LogType::info);
-	}
-	else
-	{
-		FLog::glogf("Failed to load texture: " + name, "TEXTURES", LogType::error);
-		return;
-	}
-	stbi_image_free(data);
-	map[name] = texture;
-	*/
 	Texture2D texture;
 	texture.Internal_Format = GL_RGBA8;
 	texture.Image_Format = GL_RGBA;
