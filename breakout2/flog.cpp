@@ -16,17 +16,18 @@ void FLog::init() {
 }
 
 void FLog::glogf(std::string s, std::string a, LogType t) {
-	if (!logFileCreated) {
+	if (!logFileCreated) { // create log file it doesn't exist
 		try {
 			std::string fileName = "logs/log_";
 			__time64_t t;
 			struct std::tm now;
 			_time64(&t);
-			errno_t err = _localtime64_s(&now, &t);
+			errno_t err = _localtime64_s(&now, &t); // get actual time
 			if (err)
 			{
 				throw new std::exception();
 			}
+			// create name from time
 			fileName += std::to_string(now.tm_year + 1900) + '_';
 			fileName += std::to_string(now.tm_mon + 1) + '_';
 			fileName += std::to_string(now.tm_mday) + '_';
@@ -45,9 +46,12 @@ void FLog::glogf(std::string s, std::string a, LogType t) {
 			std::exit(-1);
 		}
 	}
+	// log message
 	if (t == LogType::raw) {
 		std::cout << s << std::endl;
-		fLogStream << s << std::endl;
+		if (logFileCreated == 1) {
+			fLogStream << s << std::endl;
+		}
 		return;
 	}
 	std::string type = t == LogType::info ? "INFO"
@@ -55,7 +59,9 @@ void FLog::glogf(std::string s, std::string a, LogType t) {
 		: t == LogType::error ? "#ERROR#" : "";
 	std::string c = "[" + type + "/" + a + "]: " + s;
 	std::cout << c << std::endl;
-	fLogStream << c << std::endl;
+	if (logFileCreated == 1) {
+		fLogStream << c << std::endl;
+	}
 }
 
 void FLog::logShutdown() {
