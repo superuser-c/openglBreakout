@@ -53,8 +53,6 @@ int main(int argc, char *argv[])
 	Breakout.SetTextureManager(*tm);
 	Breakout.Load();
 	Breakout.Init();
-	//FLog::glogf(std::to_string(tm->getResource("ball").ID), "T/MAIN", LogType::info);
-	//FLog::glogf(std::to_string(tm->getResource("block").ID), "T/MAIN", LogType::info);
 
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
